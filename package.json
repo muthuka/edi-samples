@@ -1,0 +1,15 @@
+{
+  "name": "idi-samples",
+  "version": "1.0.0",
+  "description": "Playground to convert a structured data into EDI 835 file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-x12": "^1.7.1"
+  }
+}
