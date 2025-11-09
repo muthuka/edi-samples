@@ -1,0 +1,65 @@
+{
+  "payerInfo": {
+    "name": "ACME Health Insurance",
+    "id": "12345"
+  },
+  "payeeInfo": {
+    "name": "General Hospital",
+    "npi": "1234567893",
+    "taxId": "123456789"
+  },
+  "checkInfo": {
+    "checkNumber": "CHK123456",
+    "checkDate": "20231115",
+    "checkAmount": "1500.00"
+  },
+  "claims": [
+    {
+      "patientControlNumber": "PAT001",
+      "claimStatusCode": "1",
+      "chargeAmount": "1000.00",
+      "paidAmount": "800.00",
+      "patientInfo": {
+        "lastName": "Smith",
+        "firstName": "John",
+        "memberId": "MEM123456"
+      },
+      "serviceLines": [
+        {
+          "procedureCode": "99213",
+          "chargeAmount": "500.00",
+          "paidAmount": "400.00",
+          "units": "1",
+          "dateOfService": "20231101"
+        },
+        {
+          "procedureCode": "80053",
+          "chargeAmount": "500.00",
+          "paidAmount": "400.00",
+          "units": "1",
+          "dateOfService": "20231101"
+        }
+      ]
+    },
+    {
+      "patientControlNumber": "PAT002",
+      "claimStatusCode": "1",
+      "chargeAmount": "875.00",
+      "paidAmount": "700.00",
+      "patientInfo": {
+        "lastName": "Johnson",
+        "firstName": "Jane",
+        "memberId": "MEM789012"
+      },
+      "serviceLines": [
+        {
+          "procedureCode": "99214",
+          "chargeAmount": "875.00",
+          "paidAmount": "700.00",
+          "units": "1",
+          "dateOfService": "20231102"
+        }
+      ]
+    }
+  ]
+}
