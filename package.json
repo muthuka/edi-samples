@@ -4,6 +4,8 @@
   "description": "Playground to convert a structured data into EDI 835 file.",
   "main": "index.js",
   "scripts": {
+    "start": "node generate-edi-835.js",
+    "examples": "node examples.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -32,6 +32,8 @@ The repository includes a sample script that generates an EDI 835 file from JSON
 
 ```bash
 node generate-edi-835.js
+# or
+npm start
 ```
 
 This will:
@@ -39,6 +41,20 @@ This will:
 - Generate an EDI 835 transaction
 - Output the EDI string to the console
 - Save the EDI file to `output-835.edi`
+
+### Running the Examples
+
+For more comprehensive examples showing different scenarios:
+
+```bash
+node examples.js
+# or
+npm run examples
+```
+
+This will generate two example EDI 835 files:
+- `example-simple-835.edi` - A simple single claim with one service line
+- `example-complex-835.edi` - Multiple claims with multiple service lines each
 
 ### Using as a Module
 
@@ -134,6 +150,7 @@ This project uses the [node-x12](https://github.com/aaronhuggins/node-x12) libra
 
 - `generate-edi-835.js` - Main script for generating EDI 835 from JSON
 - `sample-835-data.json` - Sample JSON data with claim payment information
+- `examples.js` - Additional examples showing simple and complex scenarios
 - `package.json` - Node.js project configuration and dependencies
 
 ## Resources
