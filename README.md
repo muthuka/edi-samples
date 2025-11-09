@@ -1,4 +1,4 @@
-# idi-samples
+# edi-samples
 
 Playground to convert structured data into EDI 835 file using the [node-x12](https://github.com/aaronhuggins/node-x12) library.
 
@@ -15,8 +15,8 @@ This repository contains a sample Node.js script that demonstrates how to genera
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/muthuka/idi-samples.git
-cd idi-samples
+git clone https://github.com/muthuka/edi-samples.git
+cd edi-samples
 ```
 
 2. Install dependencies:

@@ -15,7 +15,8 @@ const fs = require('fs');
  */
 function generateEDI835(jsonData) {
   const currentDate = new Date();
-  const currentDateStr = currentDate.toISOString().slice(0, 10).replace(/-/g, '').slice(2); // YYMMDD
+  const currentDateStrFull = currentDate.toISOString().slice(0, 10).replace(/-/g, ''); // yyyyMMDD
+  const currentDateStrShort = currentDateStrFull.slice(2); // YYMMDD (for ISA segment)
   const currentTimeStr = currentDate.toTimeString().slice(0, 8).replace(/:/g, ''); // HHMMSS
   
   // Calculate total payment amount
@@ -36,7 +37,7 @@ function generateEDI835(jsonData) {
     jsonData.payerInfo.id.padEnd(15), // Interchange Sender ID
     'ZZ',                             // Interchange ID Qualifier (Receiver)
     jsonData.payeeInfo.taxId.padEnd(15), // Interchange Receiver ID
-    currentDateStr,                   // Interchange Date (YYMMDD)
+    currentDateStrShort,              // Interchange Date (YYMMDD)
     currentTimeStr.slice(0, 4),       // Interchange Time (HHMM)
     'U',                              // Interchange Control Standards ID
     '00401',                          // Interchange Control Version Number
@@ -54,7 +55,7 @@ function generateEDI835(jsonData) {
     'HP',                             // Functional Identifier Code (HP = Health Care Claim Payment)
     jsonData.payerInfo.id,            // Application Sender's Code
     jsonData.payeeInfo.taxId,         // Application Receiver's Code
-    currentDateStr,                   // Date (YYMMDD)
+    currentDateStrFull,               // Date (yyyyMMDD)
     currentTimeStr.slice(0, 4),       // Time (HHMM)
     '1',                              // Group Control Number
     'X',                              // Responsible Agency Code
@@ -106,7 +107,7 @@ function generateEDI835(jsonData) {
   // DTM segment - Production Date
   transaction.addSegment('DTM', [
     '405',                            // Date/time qualifier (405 = Production)
-    currentDateStr                    // Date (YYMMDD)
+    currentDateStrFull                // Date (yyyyMMDD)
   ]);
   
   // N1 segment - Payer Name
@@ -180,7 +181,7 @@ function generateEDI835(jsonData) {
   // PLB segment - Provider Level Adjustment (optional)
   transaction.addSegment('PLB', [
     jsonData.payeeInfo.npi,           // Provider identifier
-    currentDateStr,                   // Fiscal period date
+    currentDateStrFull,               // Fiscal period date (yyyyMMDD)
     '',                               // Adjustment reason code
     ''                                // Adjustment amount
   ]);
@@ -192,8 +193,18 @@ function generateEDI835(jsonData) {
 // Main execution
 if (require.main === module) {
   try {
-    // Read sample JSON data
-    const jsonData = JSON.parse(fs.readFileSync('./sample-835-data.json', 'utf8'));
+    // Get input file from command line arguments
+    const inputFile = process.argv[2] || './test1.json';
+    const outputFile = process.argv[3] || './output-835.edi';
+    
+    // Check if input file exists
+    if (!fs.existsSync(inputFile)) {
+      console.error(`Error: Input file '${inputFile}' not found.`);
+      process.exit(1);
+    }
+    
+    // Read JSON data from input file
+    const jsonData = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
     
     // Generate EDI 835
     const edi835 = generateEDI835(jsonData);
@@ -204,8 +215,8 @@ if (require.main === module) {
     console.log(edi835);
     
     // Save to file
-    fs.writeFileSync('./output-835.edi', edi835);
-    console.log('\nEDI 835 saved to output-835.edi');
+    fs.writeFileSync(outputFile, edi835);
+    console.log(`\nEDI 835 saved to ${outputFile}`);
     
   } catch (error) {
     console.error('Error generating EDI 835:', error.message);

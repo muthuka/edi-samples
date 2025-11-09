@@ -1,5 +1,5 @@
 {
-  "name": "idi-samples",
+  "name": "edi-samples",
   "version": "1.0.0",
   "description": "Playground to convert a structured data into EDI 835 file.",
   "main": "index.js",
