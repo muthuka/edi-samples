@@ -13,13 +13,16 @@ This repository contains a sample Node.js script that demonstrates how to genera
 
 ## Installation
 
+<!-- markdownlint-disable MD029 -->
 1. Clone this repository:
+
 ```bash
 git clone https://github.com/muthuka/edi-samples.git
 cd edi-samples
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
@@ -37,7 +40,8 @@ npm start
 ```
 
 This will:
-- Read the sample data from `sample-835-data.json`
+
+- Read the sample data from `test1.json`
 - Generate an EDI 835 transaction
 - Output the EDI string to the console
 - Save the EDI file to `output-835.edi`
@@ -53,6 +57,7 @@ npm run examples
 ```
 
 This will generate two example EDI 835 files:
+
 - `example-simple-835.edi` - A simple single claim with one service line
 - `example-complex-835.edi` - Multiple claims with multiple service lines each
 
